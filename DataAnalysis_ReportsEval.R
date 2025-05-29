@@ -7,19 +7,22 @@ library(gtsummary)
 library(effectsize)
 library(MQMF)
 
+# Read in results of evaluation
 results1 <- read.csv("C:/Users/barry/Documents/Barry/DkIT HDip Data Analytics/Data Analytics Project/Football Reports in ChatGPT/Evaluation/scores.csv")
 results2 <- read_xlsx("C:/Users/barry/Downloads/Questionnaire_ AI Matchday Reporter(1-8).xlsx")
 
+# Read in researcher assessment results
 results_completeness <- read.csv("C:/Users/barry/Documents/Barry/DkIT HDip Data Analytics/Data Analytics Project/Football Reports in ChatGPT/Evaluation/completeness.csv")
 
+# Restructure data into long format
 results2_article1 <- results2 %>% select("Interest in football", "Article ID", "Enjoyment", "Excitement", "Clarity", "Quality", "Author")
 results2_article2 <- results2 %>% select("Interest in football", "Article ID2", "Enjoyment2", "Excitement2", "Clarity2", "Quality2", "Author2")
 results2_article3 <- results2 %>% select("Interest in football", "Article ID3", "Enjoyment3", "Excitement3", "Clarity3", "Quality3", "Author3")
 
-
 names(results2_article2) <- names(results2_article1) # https://stackoverflow.com/a/12019514
 names(results2_article3) <- names(results2_article1)
 
+# Combine into final dataset
 results2all <- rbind(results2_article1,results2_article2, results2_article3)
 names(results2all) <- names(results1)
 
@@ -150,8 +153,6 @@ boxplot(final_results$Clarity ~ final_results$Author, xlab = "Perceived Author",
 boxplot(final_results$Quality ~ final_results$Author, xlab = "Perceived Author", ylab = "Quality Rating", main = "Quality Rating vs. Perceived Author", names = c("ChatGPT", "Human"))
 
 par(mfrow = c(1,1))
-
-
 
 # Analysis
 
